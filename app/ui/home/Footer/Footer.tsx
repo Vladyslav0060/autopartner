@@ -1,6 +1,9 @@
+import ContactForm from "../ContactForm/ContactForm";
+
 const Footer = () => {
   return (
-    <footer className="footer footer-center bg-base-300 p-4 text-base-content">
+    <footer className="footer footer-center bg-base-300 text-base-content p-4">
+      <ContactForm />
       <aside>
         <p>Copyright © 2025 - All right reserved</p>
       </aside>
