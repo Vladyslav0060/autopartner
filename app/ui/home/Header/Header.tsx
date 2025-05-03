@@ -1,34 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { headerTabs, contactNumbers } from "./contsant";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { MdMenu } from "react-icons/md";
 import { Separator } from "@/components/ui/separator";
+import { ModeToggle } from "@/components/ui/mode-toggle";
+import Logo from "@/public/images/logo/moovex-transparent.png";
+import Image from "next/image";
 
 const MobileNav = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="md:hidden flex w-full justify-between">
-      <h1 className="text-2xl font-bold">AutoPartner</h1>
+    <div className="text-secondary-foreground flex w-full items-center justify-between md:hidden">
+      <Image src={Logo} alt="Logo" className="max-w-[150px]" />
       <PhoneNumbers />
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button variant="ghost" size="icon" className="md:hidden">
-            <MdMenu size={24} className="size-6" />
+            <MdMenu className="size-9 text-black" />
           </Button>
         </SheetTrigger>
 
         <SheetContent side="right" showCloseButton={false}>
+          <div className="flex justify-end">
+            <ModeToggle />
+          </div>
           <ul className="flex flex-col items-start">
             {headerTabs.map((tab) => (
               <li
                 key={tab.title}
-                className="pl-4 h-12 w-full flex items-center border-b border-neutral-300 border-collapse"
+                className="flex h-12 w-full border-collapse items-center border-b border-neutral-300 pl-4"
               >
-                <a href={tab.url} className="hover:underline font-semibold">
+                <a href={tab.url} className="font-semibold hover:underline">
                   {tab.title}
                 </a>
               </li>
@@ -42,7 +48,7 @@ const MobileNav = () => {
 
 const PhoneNumbers = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col text-black">
       {contactNumbers.map((number) => (
         <a key={number} href={`tel:${number}`}>
           {number}
@@ -54,18 +60,18 @@ const PhoneNumbers = () => {
 
 const DesktopNav = () => {
   return (
-    <nav className="hidden md:flex items-center gap-4 h-full w-full justify-between px-11">
-      <h1 className="text-2xl font-bold">AutoPartner</h1>
-      <ul className="flex space-x-4 h-16 items-center gap-5">
+    <nav className="hidden h-full w-full items-center justify-between gap-4 px-11 md:flex">
+      <Image src={Logo} alt="Logo" className="max-w-[200px]" />
+      <ul className="flex h-16 items-center gap-5 space-x-4">
         {headerTabs.map((tab) => (
-          <li key={tab.title} className="w-fit m-0">
+          <li key={tab.title} className="m-0 w-fit">
             <a href={tab.url} className="hover:underline">
               {tab.title}
             </a>
           </li>
         ))}
       </ul>
-      <div className="flex gap-4 h-full w-fit items-center">
+      <div className="flex h-full w-fit items-center gap-4">
         <div className="flex size-full">
           <PhoneNumbers />
         </div>
@@ -78,8 +84,8 @@ const DesktopNav = () => {
 
 const Header = () => {
   return (
-    <div className="relative h-16">
-      <header className="fixed w-full flex items-center justify-between p-2 bg-neutral-50 text-primary h-16">
+    <div className="relative my-4 flex h-[90px] justify-center">
+      <header className="fixed top-4 flex h-[90px] w-[95%] items-center justify-between rounded-3xl bg-white px-5 py-2.5 md:container">
         <DesktopNav />
         <MobileNav />
       </header>
